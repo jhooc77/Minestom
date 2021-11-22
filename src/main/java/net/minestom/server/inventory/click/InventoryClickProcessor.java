@@ -86,13 +86,13 @@ public final class InventoryClickProcessor {
             if (cursor.isAir()) {
                 // Take half of clicked
                 final int amount = (int) Math.ceil((double) clickedRule.getAmount(clicked) / 2d);
-                result.setCursor(cursorRule.apply(clicked, amount));
+                result.setCursor(clickedRule.apply(clicked, amount));
                 result.setClicked(clickedRule.apply(clicked, operand -> operand / 2));
             } else {
                 if (clicked.isAir()) {
                     // Put 1 to clicked
                     result.setCursor(cursorRule.apply(cursor, operand -> operand - 1));
-                    result.setClicked(clickedRule.apply(cursor, 1));
+                    result.setClicked(cursorRule.apply(cursor, 1));
                 } else {
                     // Swap items
                     result.setCursor(clicked);
