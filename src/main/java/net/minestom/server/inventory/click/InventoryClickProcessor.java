@@ -212,7 +212,7 @@ public final class InventoryClickProcessor {
                 clickResult = startCondition(player, inventory, slot, ClickType.END_LEFT_DRAGGING, clicked, cursor);
                 if (clickResult.isCancel()) return clickResult;
                 // Should be size of each defined slot (if not full)
-                final int slotSize = (int) ((float) cursorAmount / (float) slotCount);
+                final int slotSize = cursorAmount / slotCount;
                 // Place all waiting drag action
                 int finalCursorAmount = cursorAmount;
                 for (DragData dragData : slots) {
