@@ -10,7 +10,7 @@ import java.util.function.DoubleUnaryOperator;
 /**
  * Represents a position containing coordinates and a view.
  * <p>
- * To become record and primitive.
+ * To become a value then primitive type.
  */
 public record Pos(double x, double y, double z, float yaw, float pitch) implements Point {
     public static final Pos ZERO = new Pos(0, 0, 0);
@@ -64,6 +64,11 @@ public record Pos(double x, double y, double z, float yaw, float pitch) implemen
     @Contract(pure = true)
     public @NotNull Pos withView(float yaw, float pitch) {
         return new Pos(x, y, z, yaw, pitch);
+    }
+
+    @Contract(pure = true)
+    public @NotNull Pos withView(@NotNull Pos pos) {
+        return withView(pos.yaw(), pos.pitch());
     }
 
     /**

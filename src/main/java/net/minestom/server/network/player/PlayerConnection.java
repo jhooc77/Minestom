@@ -3,20 +3,17 @@ package net.minestom.server.network.player;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.minestom.server.MinecraftServer;
+import net.minestom.server.entity.Entity;
 import net.minestom.server.entity.Player;
 import net.minestom.server.listener.manager.PacketListenerManager;
-import net.minestom.server.listener.manager.ServerPacketConsumer;
-import net.minestom.server.network.ConnectionManager;
 import net.minestom.server.network.ConnectionState;
 import net.minestom.server.network.packet.server.SendablePacket;
-import net.minestom.server.network.packet.server.ServerPacket;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.SocketAddress;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -29,7 +26,7 @@ public abstract class PlayerConnection {
 
     private Player player;
     private volatile ConnectionState connectionState;
-    private boolean online;
+    volatile boolean online;
 
     // Text used to kick client sending too many packets
     private static final Component rateLimitKickMessage = Component.text("Too Many Packets", NamedTextColor.RED);
@@ -84,11 +81,8 @@ public abstract class PlayerConnection {
 
     /**
      * Serializes the packet and send it to the client.
-     * <p>
-     * Also responsible for executing {@link ConnectionManager#onPacketSend(ServerPacketConsumer)} consumers.
      *
      * @param packet the packet to send
-     * @see #shouldSendPacket(ServerPacket)
      */
     public abstract void sendPacket(@NotNull SendablePacket packet);
 
@@ -100,20 +94,6 @@ public abstract class PlayerConnection {
     @ApiStatus.Experimental
     public void sendPackets(@NotNull SendablePacket... packets) {
         sendPackets(List.of(packets));
-    }
-
-    /**
-     * Flush waiting data to the connection.
-     * <p>
-     * Might not do anything depending on the implementation.
-     */
-    public void flush() {
-        // Empty
-    }
-
-    protected boolean shouldSendPacket(@NotNull ServerPacket serverPacket) {
-        return player == null ||
-                PACKET_LISTENER_MANAGER.processServerPacket(serverPacket, Collections.singleton(player));
     }
 
     /**
@@ -158,7 +138,14 @@ public abstract class PlayerConnection {
     /**
      * Forcing the player to disconnect.
      */
-    public abstract void disconnect();
+    public void disconnect() {
+        this.online = false;
+        MinecraftServer.getConnectionManager().removePlayer(this);
+        final Player player = getPlayer();
+        if (player != null && !player.isRemoved()) {
+            player.scheduleNextTick(Entity::remove);
+        }
+    }
 
     /**
      * Gets the player linked to this connection.
@@ -187,10 +174,6 @@ public abstract class PlayerConnection {
      */
     public boolean isOnline() {
         return online;
-    }
-
-    public void refreshOnline(boolean online) {
-        this.online = online;
     }
 
     public void setConnectionState(@NotNull ConnectionState connectionState) {
