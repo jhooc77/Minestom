@@ -52,6 +52,7 @@ loadScripts(document, 'script');</script>
 <h2 title="Contents">Contents</h2>
 <ul>
 <li><a href="#for-removal">Terminally Deprecated</a></li>
+<li><a href="#interface">Interfaces</a></li>
 <li><a href="#class">Classes</a></li>
 <li><a href="#field">Fields</a></li>
 <li><a href="#method">Methods</a></li>
@@ -81,6 +82,23 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="deprecation-comment">Please use either <a href="net/minestom/server/utils/time/TimeUnit.html#SERVER_TICK"><code>TimeUnit.SERVER_TICK</code></a> or <a href="net/minestom/server/utils/time/TimeUnit.html#CLIENT_TICK"><code>TimeUnit.CLIENT_TICK</code></a></div>
 </div>
+</div>
+</div>
+</li>
+</ul>
+<ul class="block-list">
+<li>
+<div id="interface">
+<div class="caption"><span>Deprecated Interfaces</span></div>
+<div class="summary-table two-column-summary">
+<div class="table-header col-first">Interface</div>
+<div class="table-header col-last">Description</div>
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/instance/ChunkGenerator.html" title="interface in net.minestom.server.instance">net.minestom.server.instance.ChunkGenerator</a></div>
+<div class="col-last even-row-color">
+<div class="deprecation-comment">Replaced by <a href="net/minestom/server/instance/generator/Generator.html" title="interface in net.minestom.server.instance.generator"><code>Generator</code></a></div>
+</div>
+<div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/instance/ChunkPopulator.html" title="interface in net.minestom.server.instance">net.minestom.server.instance.ChunkPopulator</a></div>
+<div class="col-last odd-row-color"></div>
 </div>
 </div>
 </li>
@@ -172,6 +190,16 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color"></div>
 <div class="col-summary-item-name even-row-color"><a href="net/minestom/server/command/CommandSender.html#isPlayer()">net.minestom.server.command.CommandSender.isPlayer()</a></div>
 <div class="col-last even-row-color"></div>
+<div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/entity/metadata/LivingEntityMeta.html#getHealthAddedByAbsorption()">net.minestom.server.entity.metadata.LivingEntityMeta.getHealthAddedByAbsorption()</a></div>
+<div class="col-last odd-row-color">
+<div class="deprecation-comment">This returns the bee stinger count, not the absorption heart count
+ Use <a href="net/minestom/server/entity/metadata/LivingEntityMeta.html#getBeeStingerCount()"><code>LivingEntityMeta.getBeeStingerCount()</code></a> instead</div>
+</div>
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/entity/metadata/LivingEntityMeta.html#setHealthAddedByAbsorption(int)">net.minestom.server.entity.metadata.LivingEntityMeta.setHealthAddedByAbsorption<wbr>(int)</a></div>
+<div class="col-last even-row-color">
+<div class="deprecation-comment">This sets the bee stinger count, not the absorption heart count
+ Use <a href="net/minestom/server/entity/metadata/LivingEntityMeta.html#setBeeStingerCount(int)"><code>LivingEntityMeta.setBeeStingerCount(int)</code></a> instead</div>
+</div>
 <div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/entity/Player.html#callItemUpdateStateEvent(boolean,net.minestom.server.entity.Player.Hand)">net.minestom.server.entity.Player.callItemUpdateStateEvent<wbr>(boolean, Player.Hand)</a></div>
 <div class="col-last odd-row-color">
 <div class="deprecation-comment">Use <a href="net/minestom/server/entity/Player.html#callItemUpdateStateEvent(net.minestom.server.entity.Player.Hand)"><code>Player.callItemUpdateStateEvent(Hand)</code></a> instead</div>
@@ -184,14 +212,32 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="deprecation-comment">use <a href="net/minestom/server/entity/PlayerSkin.html#textures()"><code>PlayerSkin.textures()</code></a></div>
 </div>
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/event/player/PlayerEatEvent.html#getFoodItem()">net.minestom.server.event.player.PlayerEatEvent.getFoodItem()</a></div>
+<div class="col-last even-row-color">
+<div class="deprecation-comment">use getItemStack() for the eaten item</div>
+</div>
+<div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/event/player/PlayerPreEatEvent.html#getFoodItem()">net.minestom.server.event.player.PlayerPreEatEvent.getFoodItem()</a></div>
+<div class="col-last odd-row-color">
+<div class="deprecation-comment">use getItemStack() for the eaten item</div>
+</div>
 <div class="col-summary-item-name even-row-color"><a href="net/minestom/server/instance/Instance.html#getCreatures()">net.minestom.server.instance.Instance.getCreatures()</a></div>
 <div class="col-last even-row-color"></div>
 <div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/instance/Instance.html#getExperienceOrbs()">net.minestom.server.instance.Instance.getExperienceOrbs()</a></div>
 <div class="col-last odd-row-color"></div>
-<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/inventory/InventoryType.html#getAdditionalSlot()">net.minestom.server.inventory.InventoryType.getAdditionalSlot()</a></div>
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/instance/Instance.html#setChunkGenerator(net.minestom.server.instance.ChunkGenerator)">net.minestom.server.instance.Instance.setChunkGenerator<wbr>(ChunkGenerator)</a></div>
 <div class="col-last even-row-color">
+<div class="deprecation-comment">Use <a href="net/minestom/server/instance/Instance.html#setGenerator(net.minestom.server.instance.generator.Generator)"><code>Instance.setGenerator(Generator)</code></a></div>
+</div>
+<div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/inventory/InventoryType.html#getAdditionalSlot()">net.minestom.server.inventory.InventoryType.getAdditionalSlot()</a></div>
+<div class="col-last odd-row-color">
 <div class="deprecation-comment">use <a href="net/minestom/server/inventory/InventoryType.html#getSize()"><code>InventoryType.getSize()</code></a></div>
 </div>
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/item/ItemStack.html#getAmount()">net.minestom.server.item.ItemStack.getAmount()</a></div>
+<div class="col-last even-row-color"></div>
+<div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/item/ItemStack.html#getMaterial()">net.minestom.server.item.ItemStack.getMaterial()</a></div>
+<div class="col-last odd-row-color"></div>
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/item/ItemStack.html#getMeta()">net.minestom.server.item.ItemStack.getMeta()</a></div>
+<div class="col-last even-row-color"></div>
 <div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/MinecraftServer.html#setChunkViewDistance(int)">net.minestom.server.MinecraftServer.setChunkViewDistance<wbr>(int)</a></div>
 <div class="col-last odd-row-color">
 <div class="deprecation-comment">should instead be defined with a java property</div>
@@ -259,12 +305,16 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/scoreboard/BelowNameTag.html#%3Cinit%3E(java.lang.String,java.lang.String)">net.minestom.server.scoreboard.BelowNameTag<wbr>(String, String)</a></div>
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/entity/ai/target/ClosestEntityTarget.html#%3Cinit%3E(net.minestom.server.entity.EntityCreature,float,java.lang.Class...)">net.minestom.server.entity.ai.target.ClosestEntityTarget<wbr>(EntityCreature, float, Class&lt;? extends LivingEntity&gt;...)</a></div>
 <div class="col-last even-row-color">
+<div class="deprecation-comment">Use <a href="net/minestom/server/entity/ai/target/ClosestEntityTarget.html#%3Cinit%3E(net.minestom.server.entity.EntityCreature,double,java.util.function.Predicate)"><code>ClosestEntityTarget(EntityCreature, double, Predicate)</code></a></div>
+</div>
+<div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/scoreboard/BelowNameTag.html#%3Cinit%3E(java.lang.String,java.lang.String)">net.minestom.server.scoreboard.BelowNameTag<wbr>(String, String)</a></div>
+<div class="col-last odd-row-color">
 <div class="deprecation-comment">Use <a href="net/minestom/server/scoreboard/BelowNameTag.html#%3Cinit%3E(java.lang.String,net.kyori.adventure.text.Component)"><code>BelowNameTag(String, Component)</code></a></div>
 </div>
-<div class="col-summary-item-name odd-row-color"><a href="net/minestom/server/scoreboard/Sidebar.html#%3Cinit%3E(java.lang.String)">net.minestom.server.scoreboard.Sidebar<wbr>(String)</a></div>
-<div class="col-last odd-row-color">
+<div class="col-summary-item-name even-row-color"><a href="net/minestom/server/scoreboard/Sidebar.html#%3Cinit%3E(java.lang.String)">net.minestom.server.scoreboard.Sidebar<wbr>(String)</a></div>
+<div class="col-last even-row-color">
 <div class="deprecation-comment">Use <a href="net/minestom/server/scoreboard/Sidebar.html#%3Cinit%3E(net.kyori.adventure.text.Component)"><code>Sidebar(Component)</code></a></div>
 </div>
 </div>
